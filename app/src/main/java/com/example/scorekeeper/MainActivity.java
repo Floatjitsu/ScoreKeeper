@@ -1,6 +1,7 @@
 package com.example.scorekeeper;
 
 import android.os.CountDownTimer;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 long millis = millisUntilFinished;
                 String ms = String.format("%02d:%02d",
-                                            TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                         TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
                 countdown.setText(ms);
             }
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 countdown.setText(FINISHED);
                 countdown.setEnabled(true);
+                pointsTeamOne.setText("0");
+                pointsTeamTwo.setText("0");
             }
         }.start();
     }
@@ -73,5 +76,9 @@ public class MainActivity extends AppCompatActivity {
         int points = Integer.parseInt(pointsTeamTwo.getText().toString());
         points++;
         pointsTeamTwo.setText(String.valueOf(points));
+    }
+
+    public void openOptions(View view) {
+        
     }
 }
