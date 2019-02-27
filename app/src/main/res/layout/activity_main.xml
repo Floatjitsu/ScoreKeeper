@@ -80,7 +80,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Set Period Length on Options Screen"
+                android:text="Set Period Length and Teams on Options Screen"
                 android:typeface="sans"/>
 
             <EditText
@@ -102,24 +102,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
 
-        <EditText
+        <TextView
+            android:id="@+id/team1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             style="@style/Widget.AppCompat.EditText"
             android:text="Team 1"
             android:textAlignment="center"
-            android:fontFamily="@font/regular"
-            android:inputType="text"/>
+            android:fontFamily="@font/regular"/>
 
-        <EditText
+        <TextView
+            android:id="@+id/team2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            style="@style/Widget.AppCompat.EditText"
             android:text="Team 2"
             android:textAlignment="center"
-            android:fontFamily="@font/regular"
-            android:inputType="text"/>
+            android:fontFamily="@font/regular"/>
 
     </LinearLayout>
 
@@ -177,9 +178,11 @@
             android:layout_weight="0.33"
             android:onClick="setPointTeamOne"/>
         <TextView
+            android:id="@+id/gamePeriod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:textSize="20sp"
             android:layout_weight="0.33"/>
         <Button
             android:layout_width="wrap_content"
@@ -188,11 +191,5 @@
             android:layout_weight="0.33"
             android:onClick="setPointTeamTwo"/>
     </LinearLayout>
-
-    <fragment android:name="com.example.scorekeeper.Options"
-        android:id="@+id/article_fragment"
-        android:layout_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />
 
 </LinearLayout>

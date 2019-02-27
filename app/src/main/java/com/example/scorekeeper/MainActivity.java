@@ -1,9 +1,13 @@
 package com.example.scorekeeper;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,19 +19,34 @@ public class MainActivity extends AppCompatActivity {
 
     private static final long TICKINTERVAL = 1000;
     private static final String FINISHED = "00:00";
+
+    /**** Main Activity Scorekeeper ****/
     EditText countdown; //Countdown field
     CountDownTimer cdt;
     TextView pointsTeamOne;
     TextView pointsTeamTwo;
+    TextView teamOne, teamTwo; //names of the teams
+    TextView gamePeriod; //actual Period of the game
+    int period;
+    /**** ****/
+
+    /*** Option View ***/
+
+    /*** ***/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /* Initialize MainActivity Components */
         countdown = findViewById(R.id.countdown);
         pointsTeamOne = findViewById(R.id.pointsTeamOne);
         pointsTeamTwo = findViewById(R.id.pointsTeamTwo);
+        teamOne = findViewById(R.id.team1);
+        teamTwo = findViewById(R.id.team2);
+        gamePeriod = findViewById(R.id.gamePeriod);
+
     }
 
     public void startCountdown(View view) {
@@ -78,7 +97,34 @@ public class MainActivity extends AppCompatActivity {
         pointsTeamTwo.setText(String.valueOf(points));
     }
 
+    //Options for setting team names and game period
     public void openOptions(View view) {
-        
+        View v = (LayoutInflater.from(MainActivity.this)).inflate(R.layout.options, null);
+        AlertDialog.Builder alertBuilder;
+        alertBuilder =  new AlertDialog.Builder(MainActivity.this);
+        alertBuilder.setView(v);
+
+        final EditText periods = v.findViewById(R.id.periods);
+        final EditText nameTeamOne = v.findViewById(R.id.nameTeam1);
+        final EditText nameTeamTwo = v.findViewById(R.id.nameTeam2);
+
+        alertBuilder.setCancelable(true).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                /* get data from dialog */
+                int per = Integer.parseInt(periods.getText().toString());
+                String teamO = nameTeamOne.getText().toString();
+                String teamT = nameTeamTwo.getText().toString();
+
+                period = per; //For the countdown -> save int value in class attribute
+
+                //Set Input Values in Main Activity
+                gamePeriod.setText(String.valueOf(per));
+                teamOne.setText(teamO);
+                teamTwo.setText(teamT);
+            }
+        });
+        Dialog dialog = alertBuilder.create();
+        dialog.show();
     }
 }
