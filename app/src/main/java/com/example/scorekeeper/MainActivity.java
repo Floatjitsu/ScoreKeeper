@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.sql.Time;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
         gamePeriod = findViewById(R.id.gamePeriod);
 
         sharedPreferences = getSharedPreferences(MYPREFERENCES, MODE_PRIVATE);
+        loadPreferences();
+    }
+
+    //Load input fields of last game
+    public void loadPreferences() {
+        Map<String, ?> map = sharedPreferences.getAll();
+        this.teamOne.setText((String) map.get("TeamOne"));
+        this.teamTwo.setText((String) map.get("TeamTwo"));
+        this.gamePeriod.setText((String) map.get("Period"));
     }
 
     public void startCountdown(View view) {
@@ -135,9 +146,24 @@ public class MainActivity extends AppCompatActivity {
                 gamePeriod.setText(String.valueOf(per));
                 teamOne.setText(teamO);
                 teamTwo.setText(teamT);
+
+                //Safe values in sharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("TeamOne", teamO);
+                editor.putString("TeamTwo", teamT);
+                editor.putString("Period", String.valueOf(per));
+                editor.apply();
             }
         });
         Dialog dialog = alertBuilder.create();
         dialog.show();
+    }
+
+    public void resetGame(View view) {
+        countdown.setEnabled(true);
+        countdown.setText("");
+        cdt.cancel();
+        pointsTeamOne.setText("0");
+        pointsTeamTwo.setText("0");
     }
 }
