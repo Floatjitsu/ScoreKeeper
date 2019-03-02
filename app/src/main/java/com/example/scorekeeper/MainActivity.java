@@ -2,6 +2,7 @@ package com.example.scorekeeper;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
@@ -28,11 +29,10 @@ public class MainActivity extends AppCompatActivity {
     TextView teamOne, teamTwo; //names of the teams
     TextView gamePeriod; //actual Period of the game
     int period;
-    /**** ****/
 
-    /*** Option View ***/
+    SharedPreferences sharedPreferences;
+    private static final String MYPREFERENCES = "MyPrefs";
 
-    /*** ***/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         teamTwo = findViewById(R.id.team2);
         gamePeriod = findViewById(R.id.gamePeriod);
 
+        sharedPreferences = getSharedPreferences(MYPREFERENCES, MODE_PRIVATE);
     }
 
     public void startCountdown(View view) {
@@ -104,9 +105,21 @@ public class MainActivity extends AppCompatActivity {
         alertBuilder =  new AlertDialog.Builder(MainActivity.this);
         alertBuilder.setView(v);
 
+        //fields in option view
         final EditText periods = v.findViewById(R.id.periods);
         final EditText nameTeamOne = v.findViewById(R.id.nameTeam1);
         final EditText nameTeamTwo = v.findViewById(R.id.nameTeam2);
+
+        //check if teams and period are already set and if so, set the values in the options view
+        if(!(teamOne.getText().toString().equals("Team 1"))) {
+            nameTeamOne.setText(teamOne.getText().toString());
+        }
+        if(!(teamTwo.getText().toString().equals("Team 2"))) {
+            nameTeamTwo.setText(teamTwo.getText().toString());
+        }
+        if(!(gamePeriod.getText().toString() == "")) {
+            periods.setText(gamePeriod.getText().toString());
+        }
 
         alertBuilder.setCancelable(true).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
