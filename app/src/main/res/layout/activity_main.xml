@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#339933"
-    tools:context=".MainActivity">
+    android:background="@color/colorPrimary"
+    tools:context=".MainActivity"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#66ff66"
+        android:background="@color/colorAccent"
         android:layout_marginTop="10dp">
 
         <LinearLayout
@@ -60,35 +61,45 @@
             android:orientation="vertical">
 
             <Button
+                android:layout_marginTop="5dp"
+                style="@style/buttonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Start"
+                android:text="@string/start"
+                android:layout_marginBottom="5dp"
                 android:onClick="startCountdown"/>
             <Button
+                style="@style/buttonStyle"
+                android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Reset&#10;Clock"
+                android:text="@string/reset_clock"
                 android:onClick="resetCountdown"/>
 
         </LinearLayout>
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:orientation="vertical">
 
             <TextView
+                style="@style/textColor"
+                android:layout_marginLeft="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Set Period Length and Teams on Options Screen"
                 android:typeface="sans"/>
 
             <EditText
+                style="@style/textColor"
                 android:id="@+id/countdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="mm:ss"
+                android:layout_marginLeft="5dp"
                 android:maxLength="5"
                 android:textSize="35sp"
                 android:inputType="time"
@@ -104,21 +115,21 @@
         android:layout_marginTop="10dp">
 
         <TextView
+            style="@style/teamStyle"
             android:id="@+id/team1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            style="@style/Widget.AppCompat.EditText"
             android:text="Team 1"
             android:textAlignment="center"
             android:fontFamily="@font/regular"/>
 
         <TextView
+            style="@style/teamStyle"
             android:id="@+id/team2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            style="@style/Widget.AppCompat.EditText"
             android:text="Team 2"
             android:textAlignment="center"
             android:fontFamily="@font/regular"/>
@@ -130,6 +141,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            style="@style/textColor"
             android:id="@+id/pointsTeamOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,6 +153,7 @@
             />
 
         <TextView
+            style="@style/textColor"
             android:id="@+id/pointsTeamTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -158,6 +171,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            style="@style/textColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Period"
@@ -173,12 +187,14 @@
         android:layout_height="wrap_content">
 
         <Button
+            style="@style/buttonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="set"
+            android:text="@string/set_point"
             android:layout_weight="0.33"
             android:onClick="setPointTeamOne"/>
         <TextView
+            style="@style/textColor"
             android:id="@+id/gamePeriod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -186,9 +202,10 @@
             android:textSize="20sp"
             android:layout_weight="0.33"/>
         <Button
+            style="@style/buttonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="set"
+            android:text="@string/set_point"
             android:layout_weight="0.33"
             android:onClick="setPointTeamTwo"/>
     </LinearLayout>
